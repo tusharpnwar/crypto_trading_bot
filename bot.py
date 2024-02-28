@@ -65,6 +65,14 @@ def sma_strategy(ticker, short_window, long_window):
 
 # Streamlit UI with user inputs
 def main():
+    # Add a link to the style.css file
+    st.markdown(
+        """
+        <link href="style.css" rel="stylesheet">
+        """,
+        unsafe_allow_html=True
+    )
+
     st.title("Stock Price Prediction and Analysis App")
 
     ticker = st.text_input("Enter the ticker symbol (e.g., BTC-USD, ETH-USD, LTC-USD):")
