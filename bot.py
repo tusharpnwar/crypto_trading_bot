@@ -64,6 +64,7 @@ def sma_strategy(ticker, short_window, long_window):
         return 'Hold'
 
 
+
 # Streamlit UI with user inputs
 def main():
     # Add a link to the style.css file
