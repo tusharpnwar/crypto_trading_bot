@@ -51,8 +51,8 @@ def predict_price(ticker, start_date, end_date, steps=1):
 # Define the SMA strategy function
 def sma_strategy(ticker, short_window, long_window):
     data = yf.download(ticker, period="1d", interval="1d")
-    data['SMA_Short'] = data['Adj Close'].rolling(window=short_window).mean()
-    data['SMA_Long'] = data['Adj Close'].rolling(window=long_window).mean()
+    data['SMA_Short'] = data['Close'].rolling(window=short_window).mean()  # Use 'Close' column instead of 'Adj Close'
+    data['SMA_Long'] = data['Close'].rolling(window=long_window).mean()   # Use 'Close' column instead of 'Adj Close'
     last_short_sma = data['SMA_Short'].iloc[-1]
     last_long_sma = data['SMA_Long'].iloc[-1]
 
@@ -62,6 +62,7 @@ def sma_strategy(ticker, short_window, long_window):
         return 'Sell'
     else:
         return 'Hold'
+
 
 # Streamlit UI with user inputs
 def main():
