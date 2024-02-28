@@ -92,13 +92,14 @@ def main():
             data = yf.download(ticker, start=date_range[0], end=date_range[1])
             fig = go.Figure()
             fig.add_trace(go.Scatter(x=data.index, y=data['Adj Close'], mode='lines', name='Historical Prices'))
-            if show_predicted_price:
-                fig.add_trace(go.Scatter(x=predicted_closing_price.index, y=predicted_closing_price['Predicted Close'], mode='lines', name='Predicted Prices'))
+            fig.add_trace(go.Scatter(x=predicted_closing_price.index, y=predicted_closing_price['Predicted Close'], mode='lines', name='Predicted Prices'))
             fig.update_layout(title=f'Historical and Predicted Prices for {ticker}',
                               xaxis_title='Date',
                               yaxis_title='Price')
             st.plotly_chart(fig)
 
+            if show_predicted_price:
+                st.write(f"Predicted Closing Price for {ticker}:", predicted_closing_price)
             if show_sma_analysis:
                 decision = sma_strategy(ticker, short_window, long_window)
                 st.write(f"Trading Decision for {ticker}:", decision)
