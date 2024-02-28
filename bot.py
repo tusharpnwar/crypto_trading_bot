@@ -7,7 +7,7 @@ import streamlit as st
 import plotly.graph_objects as go
 
 # Load the ARIMA model
-arima_model = joblib.load(r'C:\Users\ranja\Desktop\streamlit cyrpto\Crypto_Guides\arima_model.joblib')
+arima_model = joblib.load(arima_model.joblib')
 
 # Define functions for data fetching and prediction
 def fetch_data(ticker, start_date, end_date):
