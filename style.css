@@ -1,32 +1,40 @@
 @import url('https://fonts.googleapis.com/css2?family=Anta&display=swap');
 
-*{
-  font-family: 'Anta', sans-serif;
+body {
+    font-family: 'Anta', sans-serif;
+    color: #fff; /* Text color */
+    background-color: #121212; /* Dark background color */
 }
 
 h1 {
-    color: #0056b3;
+    color: #64ffda; /* Heading color */
 }
 
 p {
-    color: #333;
+    color: #a9a9a9; /* Paragraph text color */
 }
 
-input[type="text"], input[type="number"], input[type="date"], input[type="checkbox"], button {
+input[type="text"],
+input[type="number"],
+input[type="date"],
+input[type="checkbox"],
+button {
     margin: 5px 0;
     padding: 8px;
-    border: 1px solid #ccc;
+    border: 1px solid #555; /* Border color */
     border-radius: 5px;
+    background-color: #333; /* Input background color */
+    color: #fff; /* Input text color */
 }
 
 button {
-    background-color: #0056b3;
-    color: #fff;
+    background-color: #64ffda; /* Button background color */
+    color: #121212; /* Button text color */
     cursor: pointer;
 }
 
 button:hover {
-    background-color: #004080;
+    background-color: #00bfa5; /* Button hover background color */
 }
 
 .checkbox-container {
