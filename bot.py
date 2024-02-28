@@ -51,8 +51,8 @@ def predict_price(ticker, start_date, end_date, steps=1):
 # Define the SMA strategy function
 def sma_strategy(ticker, short_window, long_window):
     data = yf.download(ticker, period="1d", interval="1d")
-    data['SMA_Short'] = data['Close'].rolling(window=short_window).mean()  # Use 'Close' column instead of 'Adj Close'
-    data['SMA_Long'] = data['Close'].rolling(window=long_window).mean()   # Use 'Close' column instead of 'Adj Close'
+    data['SMA_Short'] = data['Adj Close'].rolling(window=short_window).mean()
+    data['SMA_Long'] = data['Adj Close'].rolling(window=long_window).mean()
     last_short_sma = data['SMA_Short'].iloc[-1]
     last_long_sma = data['SMA_Long'].iloc[-1]
 
@@ -62,8 +62,6 @@ def sma_strategy(ticker, short_window, long_window):
         return 'Sell'
     else:
         return 'Hold'
-
-
 
 # Streamlit UI with user inputs
 def main():
@@ -85,7 +83,6 @@ def main():
     show_current_price = st.checkbox("Show Current Price")
     show_predicted_price = st.checkbox("Show Predicted Price")
     show_sma_analysis = st.checkbox("Show SMA Analysis")
-    show_additional_charts = st.checkbox("Show Additional Charts")
 
     if st.button("Predict"):
         if ticker:
@@ -110,25 +107,6 @@ def main():
             if show_sma_analysis:
                 decision = sma_strategy(ticker, short_window, long_window)
                 st.write(f"Trading Decision for {ticker}:", decision)
-
-            if show_additional_charts:
-                # Visualize some additional charts
-                st.subheader("Additional Charts")
-                st.write("Here are some additional visualizations:")
-
-                # Bar chart example
-                st.subheader("Bar Chart Example")
-                bar_data = {'Category': ['A', 'B', 'C', 'D'],
-                            'Values': [20, 30, 25, 35]}
-                bar_df = pd.DataFrame(bar_data)
-                st.bar_chart(bar_df.set_index('Category'))
-
-                # Pie chart example
-                st.subheader("Pie Chart Example")
-                pie_data = {'Category': ['A', 'B', 'C', 'D'],
-                            'Values': [20, 30, 25, 35]}
-                pie_df = pd.DataFrame(pie_data)
-                st.plotly_chart(go.Figure(data=[go.Pie(labels=pie_df['Category'], values=pie_df['Values'])]))
 
 # Execute the Streamlit app
 if __name__ == '__main__':
