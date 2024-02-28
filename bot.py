@@ -4,9 +4,10 @@ import joblib
 from statsmodels.tsa.arima.model import ARIMA
 import numpy as np
 import streamlit as st
+import plotly.graph_objects as go
 
 # Load the ARIMA model
-arima_model = joblib.load('arima_model.joblib')
+arima_model = joblib.load(r'C:\Users\ranja\Desktop\streamlit cyrpto\Crypto_Guides\arima_model.joblib')
 
 # Define functions for data fetching and prediction
 def fetch_data(ticker, start_date, end_date):
@@ -82,6 +83,17 @@ def main():
             if show_current_price:
                 current_price = fetch_data(ticker, start_date=date_range[0], end_date=date_range[1])['Adj Close']
                 st.write(f"Current Price for {ticker}:", current_price)
+
+            # Plot historical and predicted prices
+            data = yf.download(ticker, start=date_range[0], end=date_range[1])
+            fig = go.Figure()
+            fig.add_trace(go.Scatter(x=data.index, y=data['Adj Close'], mode='lines', name='Historical Prices'))
+            fig.add_trace(go.Scatter(x=predicted_closing_price.index, y=predicted_closing_price, mode='lines', name='Predicted Prices'))
+            fig.update_layout(title=f'Historical and Predicted Prices for {ticker}',
+                              xaxis_title='Date',
+                              yaxis_title='Price')
+            st.plotly_chart(fig)
+
             if show_predicted_price:
                 st.write(f"Predicted Closing Price for {ticker}:", predicted_closing_price)
             if show_sma_analysis:
