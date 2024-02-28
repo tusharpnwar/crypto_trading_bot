@@ -1,8 +1,7 @@
-/* style.css */
+@import url('https://fonts.googleapis.com/css2?family=Anta&display=swap');
 
-/* Add your custom styles here */
-body {
-    font-family: Arial, sans-serif;
+*{
+  font-family: 'Anta', sans-serif;
 }
 
 h1 {
