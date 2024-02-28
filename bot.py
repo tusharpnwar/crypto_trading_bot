@@ -43,7 +43,7 @@ def predict_price(ticker, start_date, end_date, steps=1):
     predicted_close = adj_closing_price + predicted_residuals.values
 
     # Generate date range for the predicted prices
-    date_range = pd.date_range(start=end_date, periods=steps+1, closed='right')
+    date_range = pd.date_range(start=end_date, periods=steps+1)
     predicted_prices = pd.DataFrame(predicted_close, index=date_range[1:], columns=['Predicted Close'])
 
     return predicted_prices
