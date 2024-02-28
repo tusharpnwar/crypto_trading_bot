@@ -40,9 +40,13 @@ def predict_price(ticker, start_date, end_date, steps=1):
 
     forecast = arima_model.get_forecast(steps=steps)  
     predicted_residuals = forecast.predicted_mean
-    predicted_close = adj_closing_price + predicted_residuals.values[0]
+    predicted_close = adj_closing_price + predicted_residuals.values
 
-    return predicted_close
+    # Generate date range for the predicted prices
+    date_range = pd.date_range(start=end_date, periods=steps+1, closed='right')
+    predicted_prices = pd.DataFrame(predicted_close, index=date_range[1:], columns=['Predicted Close'])
+
+    return predicted_prices
 
 # Define the SMA strategy function
 def sma_strategy(ticker, short_window, long_window):
@@ -88,7 +92,7 @@ def main():
             data = yf.download(ticker, start=date_range[0], end=date_range[1])
             fig = go.Figure()
             fig.add_trace(go.Scatter(x=data.index, y=data['Adj Close'], mode='lines', name='Historical Prices'))
-            fig.add_trace(go.Scatter(x=predicted_closing_price.index, y=predicted_closing_price, mode='lines', name='Predicted Prices'))
+            fig.add_trace(go.Scatter(x=predicted_closing_price.index, y=predicted_closing_price['Predicted Close'], mode='lines', name='Predicted Prices'))
             fig.update_layout(title=f'Historical and Predicted Prices for {ticker}',
                               xaxis_title='Date',
                               yaxis_title='Price')
