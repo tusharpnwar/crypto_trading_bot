@@ -40,7 +40,7 @@ def predict_price(ticker, start_date, end_date, steps=1):
 
     forecast = arima_model.get_forecast(steps=steps)  
     predicted_residuals = forecast.predicted_mean
-    predicted_close = adj_closing_price + predicted_residuals.values
+    predicted_close = adj_closing_price + np.cumsum(predicted_residuals.values)
 
     # Generate date range for the predicted prices
     date_range = pd.date_range(start=end_date, periods=steps+1)
