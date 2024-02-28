@@ -67,7 +67,7 @@ def sma_strategy(ticker, short_window, long_window):
 def main():
     # Add a link to the style.css file
     with open("style.css") as f:
-    st.markdown("<style>{}</style>".format(f.read()), unsafe_allow_html=True)
+        st.markdown("<style>{}</style>".format(f.read()), unsafe_allow_html=True)
 
     st.title("Stock Price Prediction and Analysis App")
 
