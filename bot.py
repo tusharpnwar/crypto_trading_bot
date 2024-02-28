@@ -23,7 +23,7 @@ page_bg_img = f"""
 [data-testid="stAppViewContainer"] > .main {{
     background-image: url("https://images.unsplash.com/photo-1501426026826-31c667bdf23d");
     background-size: 180%;
-    background-position: top left;
+    background-position: cover;
     background-repeat: no-repeat;
     background-attachment: local;
 }}
