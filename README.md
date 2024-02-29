@@ -1,6 +1,6 @@
 # Crypto Prediction and Analysis App
 
-This Streamlit app provides users with tools for predicting and analyzing stock prices using various techniques, including ARIMA (AutoRegressive Integrated Moving Average) modeling and Simple Moving Average (SMA) analysis.
+This Streamlit app provides users with tools for predicting and analyzing stock prices using various techniques, including ARIMA (AutoRegressive Integrated Moving Average) modeling and Simple Moving Average (SMA) analysis.[DEPLOYED WEBSITE LINK](https://cryptotradingbot11.streamlit.app/)
 
 ## Features
 
