@@ -1,21 +1,47 @@
 @import url('https://fonts.googleapis.com/css2?family=Anta&display=swap');
 
-*{
-  font-family: 'Anta', sans-serif;
+/* style.css */
+
+/* Change font size for the entire app */
+body {
+    font-family: 'Anta', sans-serif;
+    font-size: 16px; /* Adjust the base font size as needed */
+    display: flex;
+    flex-direction: row; /* Set the main axis to be horizontal for landscape layout */
 }
 
+/* Adjust the width of the sidebar */
+[data-testid="stSidebar"] {
+    width: 20%; /* Adjust the width of the sidebar as needed */
+}
+
+/* Adjust the width of the main content area */
+[data-testid="stAppViewContainer"] {
+    width: 80%; /* Adjust the width of the main content area as needed */
+}
+
+/* Adjust the font size for specific elements */
 h1 {
     color: #0056b3;
-    font-size: 52px;
+    font-size: 28px; /* Adjust the font size for headings */
 }
 
+p {
+    color: #333;
+    font-size: 18px; /* Adjust the font size for paragraphs */
+}
+
+/* Adjust the font size for the selectbox label */
+div[data-baseweb="select"] > div:nth-child(1) {
+    font-size: 16px; /* Adjust the font size for the selectbox label */
+}
 
 input[type="text"], input[type="number"], input[type="date"], input[type="checkbox"], button {
     margin: 5px 0;
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    font-size: 18px;
+    font-size: 16px; /* Adjust the font size for input fields and buttons */
 }
 
 button {
