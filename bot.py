@@ -146,7 +146,6 @@ def main():
             if show_sma_analysis:
                 decision = sma_strategy(ticker, short_window, long_window)
                 st.write(f"Trading Decision for {ticker}:", decision)
-    st.title("Your Existing Streamlit App Title")
 
 # Your existing Streamlit app code goes here...
 
