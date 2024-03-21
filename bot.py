@@ -109,7 +109,7 @@ def main():
 
     st.title("Stock Price Prediction and Analysis App")
 
-    ticker = st.text_input("Enter the ticker symbol (e.g., BTC-USD, ETH-USD, LTC-USD):")
+    ticker = st.selectbox("Select a ticker symbol:", ["BTC-USD", "ETH-USD", "LTC-USD"])
 
     date_range = st.date_input("Select a date range:", value=(pd.Timestamp('2022-01-01'), pd.Timestamp.today()))
 
