@@ -156,6 +156,7 @@ if __name__ == '__main__':
 # Echo Bot integration as a sidebar
 st.sidebar.title("ChatGPT-like clone")
 
+
 client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 if "openai_model" not in st.session_state:
@@ -184,4 +185,7 @@ if prompt := st.chat_input("What is up?"):
         )
         response = st.write_stream(stream)
     st.session_state.messages.append({"role": "assistant", "content": response})
+
+# Clearing the cache
+st.cache_data.clear()
 
