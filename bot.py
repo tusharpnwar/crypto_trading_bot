@@ -113,8 +113,8 @@ def main():
 
     date_range = st.date_input("Select a date range:", value=(pd.Timestamp('2022-01-01'), pd.Timestamp.today()))
 
-    short_window = st.number_input("Short SMA Window:", value=10, min_value=1)
-    long_window = st.number_input("Long SMA Window:", value=50, min_value=1)
+    short_window = st.slider("Short SMA Window:", min_value=1, max_value=100, value=10)
+    long_window = st.slider("Long SMA Window:", min_value=1, max_value=200, value=50)
 
     prediction_steps = st.number_input("Prediction Steps (ARIMA):", value=1, min_value=1)
 
