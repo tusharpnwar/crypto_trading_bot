@@ -154,7 +154,7 @@ if __name__ == '__main__':
 # Echo Bot integration as a sidebar
 st.sidebar.title("ChatGPT-like clone")
 
-client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
+client = OpenAI(api_key="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")
 
 if "openai_model" not in st.session_state:
     st.session_state["openai_model"] = "gpt-3.5-turbo"
