@@ -6,7 +6,6 @@ from statsmodels.tsa.arima.model import ARIMA
 import numpy as np
 import streamlit as st
 import plotly.graph_objects as go
-#from openai import OpenAI
 
 # Load the ARIMA model
 arima_model = joblib.load('arima_model.joblib')
@@ -147,10 +146,12 @@ def main():
                 decision = sma_strategy(ticker, short_window, long_window)
                 st.write(f"Trading Decision for {ticker}:", decision)
 
-# Your existing Streamlit app code goes here...
+# Execute the Streamlit app
+if __name__ == '__main__':
+    main()
 
-# Chatbot integration
-st.title("Echo Bot")
+# Echo Bot integration as a sidebar
+st.sidebar.title("Echo Bot")
 
 # Initialize chat history
 if "messages" not in st.session_state:
@@ -158,23 +159,26 @@ if "messages" not in st.session_state:
 
 # Display chat messages from history on app rerun
 for message in st.session_state.messages:
-    with st.chat_message(message["role"]):
-        st.markdown(message["content"])
+    with st.sidebar:
+        with st.chat_message(message["role"]):
+            st.markdown(message["content"])
 
 # React to user input
-if prompt := st.chat_input("What is up?"):
+if prompt := st.sidebar.text_input("What is up?"):
     # Display user message in chat message container
-    st.chat_message("user").markdown(prompt)
-    # Add user message to chat history
+    with st.sidebar:
+        st.chat_message("user").markdown(prompt)
+    # Add the user message to the chat history
     st.session_state.messages.append({"role": "user", "content": prompt})
 
+    # Echo back the user's message
     response = f"Echo: {prompt}"
+    
     # Display assistant response in chat message container
-    with st.chat_message("assistant"):
-        st.markdown(response)
+    with st.sidebar:
+        with st.chat_message("assistant"):
+            st.markdown(response)
+    
     # Add assistant response to chat history
     st.session_state.messages.append({"role": "assistant", "content": response})
 
-# Execute the Streamlit app
-if __name__ == '__main__':
-    main()
