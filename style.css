@@ -43,3 +43,7 @@ button:hover {
 .plotly-graph-div {
     margin-top: 20px;
 }
+
+.stSlider{
+    font-size: 30px;
+}
