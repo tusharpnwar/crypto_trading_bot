@@ -21,7 +21,7 @@ img = get_img_as_base64("IMAGES.jpg")
 page_bg_img = f"""
 <style>
 [data-testid="stAppViewContainer"] > .main {{
-    background-image: url("https://unsplash.com/photos/gRAS87wSVCs");
+    background-image: url("cryptoimage.jpg");
     background-size: 180%;
     background-position: cover;
     background-repeat: no-repeat;
