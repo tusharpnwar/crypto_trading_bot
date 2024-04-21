@@ -13,43 +13,6 @@ import time
 # Load the ARIMA model
 arima_model = joblib.load('arima_model.joblib')
 
-# @st.experimental_memo
-# def get_img_as_base64(file):
-#     with open(file, "rb") as f:
-#         data = f.read()
-#     return base64.b64encode(data).decode()
-
-# img = get_img_as_base64("IMAGES.jpg")
-
-# page_bg_img = f"""
-# <style>
-# [data-testid="stAppViewContainer"] > .main {{
-#     background-image: url("https://images.unsplash.com/photo-1501426026826-31c667bdf23d");
-#     background-size: 180%;
-#     background-position: cover;
-#     background-repeat: no-repeat;
-#     background-attachment: local;
-# }}
-
-# [data-testid="stSidebar"] > div:first-child {{
-#     background-image: url("data:image/png;base64,{img}");
-#     background-position: center; 
-#     background-repeat: no-repeat;
-#     background-attachment: fixed;
-# }}
-
-# [data-testid="stHeader"] {{
-#     background: rgba(0,0,0,0);
-# }}
-
-# [data-testid="stToolbar"] {{
-#     right: 2rem;
-# }}
-# </style>
-# """
-
-# st.markdown(page_bg_img, unsafe_allow_html=True)
-
 # Define functions for data fetching and prediction
 def fetch_data(ticker, start_date, end_date):
     data = yf.download(ticker, start=start_date, end=end_date)
@@ -153,36 +116,32 @@ def main():
 if __name__ == '__main__':
     main()
 
-# Echo Bot integration as a sidebar
-st.sidebar.title("ChatGPT-like clone")
+# Chatbot integration as a sidebar
+st.sidebar.title("Simple Chat")
 
-
-client = OpenAI(api_key=st.secrets["apikey"])
-
-if "openai_model" not in st.session_state:
-    st.session_state["openai_model"] = "gpt-3.5-turbo"
-
+# Initialize chat history
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
+# Display chat messages from history on app rerun
 for message in st.session_state.messages:
-    with st.chat_message(message["role"]):
-        st.markdown(message["content"])
+    with st.sidebar:
+        with st.chat_message(message["role"]):
+            st.markdown(message["content"])
 
-if prompt := st.chat_input("What is up?"):
+# Accept user input
+if prompt := st.sidebar.text_input("What is up?"):
+    # Add user message to chat history
     st.session_state.messages.append({"role": "user", "content": prompt})
-    with st.chat_message("user"):
-        st.markdown(prompt)
+    # Display user message in chat message container
+    with st.sidebar:
+        with st.chat_message("user"):
+            st.markdown(prompt)
 
-    with st.chat_message("assistant"):
-        stream = client.chat.completions.create(
-            model=st.session_state["openai_model"],
-            messages=[
-                {"role": m["role"], "content": m["content"]}
-                for m in st.session_state.messages
-            ],
-            stream=True,
-        )
-        response = st.write_stream(stream)
+    # Display assistant response in chat message container
+    with st.sidebar:
+        with st.chat_message("assistant"):
+            response = response_generator()
+            st.write(response)
+    # Add assistant response to chat history
     st.session_state.messages.append({"role": "assistant", "content": response})
-
