@@ -70,16 +70,13 @@ def sma_strategy(ticker, short_window, long_window):
 
 # Chatbot response generator
 def response_generator():
-    response = random.choice(
-        [
-            "Hello there! How can I assist you today?",
-            "Hi, human! Is there anything I can help you with?",
-            "Do you need help?",
-        ]
-    )
-    for word in response.split():
-        yield word + " "
-        time.sleep(0.05)
+    responses = [
+        "Hello there! How can I assist you today?",
+        "Hi, human! Is there anything I can help you with?",
+        "Do you need help?",
+    ]
+    response = random.choice(responses)
+    return response
 
 # Streamlit UI with user inputs
 def main():
@@ -148,17 +145,12 @@ for message in st.session_state.messages:
 if prompt := st.sidebar.text_input("Chat with me:"):
     # Add user message to chat history
     st.session_state.messages.append({"role": "user", "content": prompt})
-    # Display user message in chat message container
-    with st.sidebar:
-        with st.empty():
-            with st.chat_message("user"):
-                st.markdown(prompt)
 
     # Display assistant response in chat message container
     with st.sidebar:
         with st.empty():
             with st.chat_message("assistant"):
                 response = response_generator()
-                st.write("".join(list(response)))
+                st.write(response)
     # Add assistant response to chat history
     st.session_state.messages.append({"role": "assistant", "content": response})
