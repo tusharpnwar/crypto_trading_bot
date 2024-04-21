@@ -140,22 +140,25 @@ if "messages" not in st.session_state:
 # Display chat messages from history on app rerun
 for message in st.session_state.messages:
     with st.sidebar:
-        with st.chat_message(message["role"]):
-            st.markdown(message["content"])
+        with st.empty():
+            with st.chat_message(message["role"]):
+                st.markdown(message["content"])
 
 # Accept user input
-if prompt := st.sidebar.text_input("What is up?"):
+if prompt := st.sidebar.text_input("Chat with me:"):
     # Add user message to chat history
     st.session_state.messages.append({"role": "user", "content": prompt})
     # Display user message in chat message container
     with st.sidebar:
-        with st.chat_message("user"):
-            st.markdown(prompt)
+        with st.empty():
+            with st.chat_message("user"):
+                st.markdown(prompt)
 
     # Display assistant response in chat message container
     with st.sidebar:
-        with st.chat_message("assistant"):
-            response = response_generator()
-            st.write(response)
+        with st.empty():
+            with st.chat_message("assistant"):
+                response = response_generator()
+                st.write("".join(list(response)))
     # Add assistant response to chat history
     st.session_state.messages.append({"role": "assistant", "content": response})
