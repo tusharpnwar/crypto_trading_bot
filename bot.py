@@ -84,7 +84,7 @@ def main():
     with open("style.css") as f:
         st.markdown("<style>{}</style>".format(f.read()), unsafe_allow_html=True)
 
-    st.title("Stock Price Prediction and Analysis App")
+    st.title("Crypto Price Prediction and Analysis App")
 
     ticker = st.selectbox("Select a ticker symbol:", ["BTC-USD", "ETH-USD", "LTC-USD"])
 
